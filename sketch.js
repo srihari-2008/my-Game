@@ -5,6 +5,8 @@ var start,startimage,rocket1,rocket1image,rocket2,rocket2image;
 var player,startrocket,launchimage;
 var a;
 var meteorsGroup;
+var bgr;
+var score = 0;
 
 function preload(){
   startimage = loadImage("dark green start button.jpg")
@@ -16,12 +18,14 @@ function preload(){
 
 function setup() {
   createCanvas(displayWidth-20,displayHeight - 120);
+  bgr = createSprite(displayWidth/2,displayHeight/2,1,1)
   start = createSprite(displayWidth/2, displayHeight/2 + 60, 1, 1);
   rocket1 = createSprite(200,400, 1, 1);
   rocket2 = createSprite(500,400, 1, 1);
   startrocket = createSprite(800,200,1,1);
    startrocket.scale = 0.4
   player = createSprite(300,400,1,1);
+  
   meteorsGroup = new Group();
 
   input = createInput();
@@ -73,12 +77,24 @@ if(gameState === "bhaskara1"){
   startrocket.visible = true
   player.addImage("player",rocket1image)
   player.scale = 0.3;
+  textSize(20)
+  text("this is bhaskara 1",900,600)
   if(mousePressedOver(startrocket)){
-    player.velocityY = -5;
-    player.velocityX = 0;
+    bgr.addImage(bgrimage)
+    bgr.scale = 3.2;
+    /*player.velocityY = -5;
+    player.velocityX = 0;*/
     a = 1
+    startrocket.destroy();
+    
   }
+  
 if(a == 1){
+  bgr.velocityY = 3;
+  if(bgr.y>displayHeight){
+  bgr.y = 200;
+  }
+  
   if(keyDown(LEFT_ARROW)){
     player.velocityX = -5;
     player.velocityY = 0;
@@ -87,6 +103,11 @@ if(a == 1){
   if(keyDown(RIGHT_ARROW)){
     player.velocityX = 5;
     player.velocityY = 0;
+  }
+
+  if(keyWentUp(RIGHT_ARROW)||keyWentUp(LEFT_ARROW)){
+  player.velocityX = 0;
+  player.velocityY = 0;  
   }
 }
     if(frameCount % 70 === 0 && a === 1)  {
@@ -98,8 +119,9 @@ if(a == 1){
     }
     if(meteorsGroup.isTouching(player)){
       meteorsGroup.destroyEach();
+      score = score + 1;
     }
-  
+ console.log(score) 
   
 }
 
