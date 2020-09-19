@@ -7,6 +7,8 @@ var a;
 var meteorsGroup;
 var bgr;
 var score = 0;
+var bullet ;
+var meteorimage;
 
 function preload(){
   startimage = loadImage("dark green start button.jpg")
@@ -14,11 +16,12 @@ function preload(){
   rocket2image = loadImage("rocket 2.png")
   launchimage = loadImage("green-start-button.jpg")
   bgrimage = loadImage("bacground 2.jpg")
+  meteorimage = loadImage("meteor.png")
 }
 
 function setup() {
   createCanvas(displayWidth-20,displayHeight - 120);
-  bgr = createSprite(displayWidth/2,displayHeight/2,1,1)
+  bgr = createSprite(displayWidth/2,displayHeight/2,2,1)
   start = createSprite(displayWidth/2, displayHeight/2 + 60, 1, 1);
   rocket1 = createSprite(200,400, 1, 1);
   rocket2 = createSprite(500,400, 1, 1);
@@ -27,6 +30,7 @@ function setup() {
   player = createSprite(300,400,1,1);
   
   meteorsGroup = new Group();
+  
 
   input = createInput();
 }
@@ -78,7 +82,7 @@ if(gameState === "bhaskara1"){
   player.addImage("player",rocket1image)
   player.scale = 0.3;
   textSize(20)
-  text("this is bhaskara 1",900,600)
+  text("This is bhaskara 1",900,600)
   if(mousePressedOver(startrocket)){
     bgr.addImage(bgrimage)
     bgr.scale = 3.2;
@@ -115,6 +119,7 @@ if(a == 1){
       meteors.x = random(0,400);
       meteors.velocityY = 3
       meteorsGroup.add(meteors);
+      
 
     }
     if(meteorsGroup.isTouching(player)){
