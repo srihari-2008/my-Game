@@ -11,6 +11,8 @@ var bullet ;
 var meteorimage;
 var powerGroup;
 var b;
+var powerimage;
+
 
 function preload(){
   startimage = loadImage("dark green start button.jpg")
@@ -22,6 +24,7 @@ function preload(){
   bgrimage2 = loadImage("bacground 1.jpg")
   asteroidimage = loadImage("asteroid2.png")
   alienimage = loadImage("alien.png")
+  powerimage = loadImage("power.jpg")
 }
 
 function setup() {
@@ -38,6 +41,8 @@ function setup() {
   meteorsGroup = new Group();
   asteroidsGroup = new Group();
   alienGroup = new Group();
+
+  
   
 
   input = createInput();
@@ -159,6 +164,8 @@ if(a == 1){
     }
     if(frameCount % 40 === 0 && a === 1)  {
       var power = createSprite(250,0,50,36)
+      power.addImage(powerimage);
+      power.scale= 0.4;
       power.x = random(0,400);
       power.velocityY = 3
       powerGroup.add(power)
